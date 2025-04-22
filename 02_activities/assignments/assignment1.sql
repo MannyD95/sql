@@ -6,7 +6,7 @@
 /* 1. Write a query that returns everything in the customer table. */
 
 SELECT *
-FROM customer
+FROM customer;
 
 /* 2. Write a query that displays all of the columns and 10 rows from the cus- tomer table, 
 sorted by customer_last_name, then customer_first_ name. */
@@ -14,19 +14,19 @@ sorted by customer_last_name, then customer_first_ name. */
 SELECT *
 FROM customer
 order by customer_last_name, customer_first_name
-LIMIT 10
+LIMIT 10;
 
 --WHERE
 /* 1. Write a query that returns all customer purchases of product IDs 4 and 9. */
 -- option 1
 SELECT customer_id, product_id, market_date, quantity
 FROM customer_purchases
-WHERE product_id = 4 OR product_id = 9
+WHERE product_id = 4 OR product_id = 9;
 
 -- option 2
 SELECT customer_id, product_id, market_date, quantity
 FROM customer_purchases
-WHERE product_id IN (4,9)
+WHERE product_id IN (4,9);
 
 
 /*2. Write a query that returns all customer purchases and a new calculated column 'price' (quantity * cost_to_customer_per_qty), 
@@ -41,7 +41,7 @@ WHERE vendor_id >=8 AND vendor_id <= 10;
 -- option 2
 SELECT vendor_id, product_id, quantity, SUM(quantity * cost_to_customer_per_qty) AS 'price'
 FROM customer_purchases
-WHERE vendor_id BETWEEN 8 AND 10
+WHERE vendor_id BETWEEN 8 AND 10;
 
 
 --CASE
@@ -54,7 +54,7 @@ SELECT product_id, product_name
 	THEN 'unit'
 	ELSE 'bulk'
 END AS prod_qty_type_condensed
-FROM product
+FROM product;
 
 /* 2. We want to flag all of the different types of pepper products that are sold at the market. 
 add a column to the previous query called pepper_flag that outputs a 1 if the product_name 
@@ -68,7 +68,7 @@ END AS prod_qty_type_condensed
 	THEN 1
 	ELSE 0
 END AS pepper_flag
-FROM product
+FROM product;
 
 
 --JOIN
@@ -84,7 +84,7 @@ vendor_type
 FROM vendor_booth_assignments  as vb
 INNER JOIN vendor as v
 	ON vb.vendor_id = v.vendor_id
-ORDER BY vendor_name, market_date
+ORDER BY vendor_name, market_date;
 
 
 /* SECTION 3 */
@@ -110,7 +110,7 @@ FROM customer as c
 INNER JOIN customer_purchases as cp
 	ON c.customer_id = cp.customer_id
 GROUP BY customer_first_name, customer_last_name
-HAVING total_spent >2000
+HAVING total_spent >2000;
 
 --Temp Table
 /* 1. Insert the original vendor table into a temp.new_vendor and then add a 10th vendor: 
@@ -130,7 +130,7 @@ CREATE TABLE temp.new_vendor AS
 SELECT *
 FROM vendor; 
 
-INSERT INTO temp.new_vendor VALUES (10,'Thomas Superfood Store', 'Fresh Focused','Thomas','Rosenthal')
+INSERT INTO temp.new_vendor VALUES (10,'Thomas Superfood Store', 'Fresh Focused','Thomas','Rosenthal');
 
 -- Date
 /*1. Get the customer_id, month, and year (in separate columns) of every purchase in the customer_purchases table.
